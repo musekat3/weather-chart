@@ -1,12 +1,16 @@
-// Function to retrieve weather data from an API
+var queryURL = 'https://api.openweathermap.org/data/2.5/forecast?lat=38.941631&lon=-119.977219&appid=77e59f20f2615bdf22dfbdc4c4c20a6b';
+
+var location = 'Reno, NV';
+
+var weatherInfo = document.getElementById('weatherInfo');
+
 function getWeather() {
-    var queryURL= 'https://api.openweathermap.org/data/2.5/forecast?lat={38.941631}&lon={-119.977219}&appid={77e59f20f2615bdf22dfbdc4c4c20a6b}';
-    fetch(`https://api.weatherapi.com/v1/current.json?key=${77e59f20f2615bdf22dfbdc4c4c20a6b}&q=${location}`)
+    fetch(`https://api.weatherapi.com/v1/current.json?key=77e59f20f2615bdf22dfbdc4c4c20a6b&q=${location}`)
     .then(response => response.json())
     .then(data => {
       const { temp_c, condition } = data.current;
 
-      weatherInfo.innerHTML = Temperature: ${temp_c}°C <br> Condition: ${condition.text};
+      weatherInfo.innerHTML = 'Temperature: ${temp_c}°C <br> Condition: ${condition.text}';
     })
     .catch(error => {
       console.error('Error:', error);
@@ -21,13 +25,13 @@ function getWeather() {
     const iconElement = document.getElementById('icon');
   
     locationElement.innerText = data.location;
-    temperatureElement.innerText = ${data.temperature}°C;
+    temperatureElement.innerText = '${data.temperature}°C';
     descriptionElement.innerText = data.description;
 
     console.log(data);
 
-    window.localStorage.setItem(getWeather);
+    window.localStorage.setItem('temperature', data.temperature);
 
   }
 
-  document.addEventListener('DOMContentLoaded', getWeather): 
+  document.addEventListener('DOMContentLoaded', getWeather); 
